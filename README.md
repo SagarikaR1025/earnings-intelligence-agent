@@ -1,6 +1,6 @@
 # Earnings Intelligence Agent
 
-An agentic AI system that autonomously analyzes SEC filings and market data to generate institutional-grade investment research briefs — powered by Claude AI, FastAPI, and scikit-learn.
+An agentic AI system that autonomously analyzes SEC filings and market data to generate institutional-grade investment research briefs : powered by Claude AI, FastAPI, and scikit-learn.
 
 ---
 
@@ -13,7 +13,7 @@ The Earnings Intelligence Agent takes a stock ticker as input and autonomously:
 3. Runs NLP sentiment analysis on filing language using a scikit-learn TF-IDF classifier
 4. Orchestrates a multi-step Claude AI agent to reason across all data sources and generate a structured investment research brief
 
-The result is a Goldman Sachs-style research output — company overview, earnings analysis, sentiment assessment, bull case, bear case, key risks, and investment outlook with a price target — delivered in seconds via a production REST API.
+The result is a Financial Services style research output equipped with: company overview, earnings analysis, sentiment assessment, bull case, bear case, key risks, and investment outlook with a price target AND delivered in seconds via a production REST API.
 
 ---
 
@@ -164,19 +164,19 @@ pytest tests/
 
 ---
 
-## Design Decisions
+## Design Motivations
 
 **Why FastAPI over Flask?**
-FastAPI provides automatic OpenAPI documentation, native Pydantic integration for request/response validation, and async support — making it the right choice for a production API that may need to handle concurrent requests.
+FastAPI provides automatic OpenAPI documentation, native Pydantic integration for request/response validation, and async support; making it the right choice for a production API that may need to handle concurrent requests.
 
 **Why a custom scikit-learn sentiment model over a pre-trained LLM for sentiment?**
-SEC filing language is highly domain-specific. A lightweight TF-IDF + logistic regression model trained on finance-specific vocabulary runs in milliseconds, provides an interpretable confidence score, and does not require an additional API call — keeping the pipeline fast and cost-efficient. The Claude agent layer handles the deeper reasoning.
+SEC filing language is highly domain-specific. A lightweight TF-IDF + logistic regression model trained on finance-specific vocabulary runs in milliseconds, provides an interpretable confidence score, and does not require an additional API call, and this keeps the pipeline fast and cost-efficient. The Claude agent layer handles the deeper reasoning.
 
 **Why structure the Claude prompt to return Pydantic-validated sections?**
-Structured output ensures the API response is always consistent and machine-readable regardless of how Claude phrases its analysis — critical for any downstream system that consumes this API.
+Structured output ensures the API response is always consistent and machine readable regardless of how Claude phrases its analysis and is critical for any downstream system that consumes this API.
 
 **Agentic design principle:**
-The Claude agent is given the raw filing text, market data, and sentiment score simultaneously and instructed to reason across all three sources — not just summarize each in isolation. This multi-source synthesis is what produces the tension analysis (e.g. flagging when bullish price action contradicts cautious filing language) that makes the brief genuinely useful.
+The Claude agent is given the raw filing text, market data, and sentiment score simultaneously and instructed to reason across all three sources (not just summarize each in isolation). This multi-source synthesis is what produces the tension analysis (e.g. flagging when bullish price action contradicts cautious filing language) that makes the brief genuinely useful.
 
 ---
 
