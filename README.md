@@ -138,7 +138,7 @@ curl -s -X POST "http://localhost:8000/api/v1/analyze/AAPL?form_type=10-K" | pyt
 
 ### Prerequisites
 - Python 3.11+
-- Anthropic API key (get one at [console.anthropic.com](https://console.anthropic.com))
+- Anthropic API key (I used: [console.anthropic.com](https://console.anthropic.com))
 
 ### Installation
 
@@ -177,9 +177,9 @@ pytest tests/
 FastAPI provides automatic OpenAPI documentation, native Pydantic integration for request/response validation, and async support; making it the right choice for a production API that may need to handle concurrent requests.
 
 **Why a custom scikit-learn sentiment model over a pre-trained LLM for sentiment?**
-SEC filing language is highly domain-specific. A lightweight TF-IDF + logistic regression model trained on finance-specific vocabulary runs in milliseconds, provides an interpretable confidence score, and does not require an additional API call, and this keeps the pipeline fast and cost-efficient. The Claude agent layer handles the deeper reasoning.
+As SEC filing language is highly domain specific. A lightweight TF-IDF + logistic regression model trained on finance oriented vocabulary runs in milliseconds, provides an interpretable confidence score, and does not require an additional API call; this keeps the pipeline fast and cost-efficient. The Claude agent layer handles the deeper reasoning.
 
-**Why structure the Claude prompt to return Pydantic-validated sections?**
+**Why structure the Claude prompt to return Pydantic validated sections?**
 Structured output ensures the API response is always consistent and machine readable regardless of how Claude phrases its analysis and is critical for any downstream system that consumes this API.
 
 **Agentic design principle:**
