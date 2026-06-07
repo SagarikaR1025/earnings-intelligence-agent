@@ -14,6 +14,7 @@ The Earnings Intelligence Agent takes a stock ticker as input and autonomously:
 4. Orchestrates a multi-step Claude AI agent to reason across all data sources and generate a structured investment research brief
 
 The result is a Financial Services style research output equipped with: company overview, earnings analysis, sentiment assessment, bull case, bear case, key risks, and investment outlook with a price target AND delivered in seconds via a production REST API.
+Designed explicitly with financial analysts and commercial bankers in mind who need rapid, structured intelligence from SEC filings without manual research.
 
 ---
 
